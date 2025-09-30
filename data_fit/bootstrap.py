@@ -16,7 +16,7 @@ def bootstrap(data_0_1, data_1_0, shape, data_TPP_x, n_bootstraps=10000, confide
         resampled_0_1 = data_0_1[indices_0_1]
         resampled_1_0 = data_1_0[indices_1_0]
         try:
-            rmse, R_squared, k, x, y, pre_x_0_1, pre_x_1_0, attraction, att_derivative = fit_data(resampled_0_1, resampled_1_0, shape=shape, data_TPP_x=data_TPP_x)
+            rmse, R_squared, k, data_TPP_x, x, y, pre_x_0_1, pre_x_1_0, attraction, att_derivative = fit_data(resampled_0_1, resampled_1_0, shape=shape, data_TPP_x=data_TPP_x)
             bootstrap_k.append(k)
             bootstrap_rmse.append(rmse)
             bootstrap_R_squared.append(R_squared)
