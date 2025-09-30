@@ -1,0 +1,34 @@
+import numpy as np
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+from S import *
+import matplotlib as mpl
+
+if __name__ == '__main__':
+    cur_path = os.getcwd()
+    output_path = os.path.join(cur_path, 'Output')
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+    cessation = pd.read_excel('data.xlsx', usecols='G,K').values[5:28, :]
+    continous = pd.read_excel('data.xlsx', usecols='B,F').values[5:26, :]
+    rmse, R_squared, k, data_TPP_x, x, y, pre_0_1, pre_1_0, att, att_derivative = fit_data(cessation, continous, shape='S', data_TPP_x=[-0.65, -0.2])
+    index = ['y', 'x', 'x_0_1', 'x_1_0', 'attraction_0', 'attraction_1', 'total_attraction', 'att_derivative_0', 'att_derivative_1', 'total_att_derivative']
+    Soil_nitrate = pd.DataFrame([y, x, pre_0_1, pre_1_0, att[0], att[1], att[0]+att[1], att_derivative[0], att_derivative[1], att_derivative[0]+att_derivative[1]], index=index).T
+    Soil_nitrate.to_csv(os.path.join(output_path, 'Soil_nitrate_new.csv'), index=False)
+    with open(os.path.join(output_path, 'params.txt'), 'w') as f:
+        f.write(f'k is {k}, R_squared is {R_squared}, rmse is {rmse}, data TPP is {data_TPP_x}')
+
+    mpl.rcParams['figure.dpi'] = 100
+    # plt.style.use('seaborn-dark')
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
+    ax.scatter(cessation[:, 0], cessation[:, 1], s=20, c='blue')
+    ax.scatter(continous[:, 0], continous[:, 1], s=20, c='red')
+    plt.xlim(-2, 2)
+    # plt.show()
+    plt.savefig(os.path.join(output_path, 'Soil_nitrate.png'), dpi=300)
+
+
+
+
