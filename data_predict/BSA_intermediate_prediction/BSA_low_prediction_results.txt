@@ -1,0 +1,4 @@
+rmse_intermediate_recovery_k_9 is 2.8928292551907027
+rmse_intermediate_enrichment_k_9 is 1.6791948102795728
+loss_intermediate_recovery_best_k is 2.8825303263615827
+loss_intermediate_enrichment_best_k is 1.7000808850201687

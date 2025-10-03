@@ -13,7 +13,7 @@ if __name__ == '__main__':
     cessation = pd.read_excel('data.xlsx', usecols='G,K').values[5:28, :]
     continous = pd.read_excel('data.xlsx', usecols='B,F').values[5:26, :]
 
-    best_k = 11.106351149639182
+    best_k = 9.111163270906282
     loss_cessation_best_k, x_cessation_best_k, y_cessation_best_k = prediction(cessation, '1_0', continous, best_k, 'S', -0.65)
     loss_continus_best_k, x_continous_best_k, y_continous_best_k = prediction(continous, '0_1', cessation, best_k, 'S', -0.2)
 

@@ -6,17 +6,6 @@ import os
 from S import *
 
 
-def plot_figure(x, y, data0_1, data1_0):
-    mpl.rcParams['figure.dpi'] = 100
-    plt.style.use('seaborn-dark')
-    fig, ax = plt.subplots()
-    ax.plot(x, y)
-    ax.scatter(data1_0[:, 0], data1_0[:, 1], s=20, c='red')
-    ax.scatter(data0_1[:, 0], data0_1[:, 1], s=20, c='blue')
-    # ax.set(xlim=(0, 300), ylim=(0, 3))
-    plt.show()
-
-
 if __name__ == '__main__':
     cur_path = os.getcwd()
     output_path = os.path.join(cur_path, 'Output')
@@ -69,27 +58,27 @@ if __name__ == '__main__':
     _, _, _, _, x_high_lower_bound, _, _, _, _, _ = fit_data(data_BSA_high_recovery, data_BSA_high_enrichment, shape='Z', k=k_high_lower_bound)
     _, _, _, _, x_high_upper_bound, _, _, _, _, _ = fit_data(data_BSA_high_recovery, data_BSA_high_enrichment, shape='Z', k=k_high_upper_bound)
     # plot fig
-    fig_14, ax_14 = plt.subplots(1, 3, figsize=(8, 8))
-    ax_14[0].plot(x_low, y_low, color='blue')
-    ax_14[0].fill_betweenx(y_low, x_low, x_low_lower_bound, alpha=0.4, color='yellow')
-    ax_14[0].fill_betweenx(y_low, x_low_upper_bound, x_low, alpha=0.4, color='yellow')
-    ax_14[0].scatter(data_BSA_low_enrichment[:, 0], data_BSA_low_enrichment[:, 1], s=20, c='red')
-    ax_14[0].scatter(data_BSA_low_recovery[:, 0], data_BSA_low_recovery[:, 1], s=20, c='black')
-    ax_14[0].set(xlim=(0.4, 2.6), ylim=(-10, 20))
+    fig, ax = plt.subplots(1, 3, figsize=(8, 8))
+    ax[0].plot(x_low, y_low, color='blue')
+    ax[0].fill_betweenx(y_low, x_low, x_low_lower_bound, alpha=0.4, color='yellow')
+    ax[0].fill_betweenx(y_low, x_low_upper_bound, x_low, alpha=0.4, color='yellow')
+    ax[0].scatter(data_BSA_low_enrichment[:, 0], data_BSA_low_enrichment[:, 1], s=20, c='red')
+    ax[0].scatter(data_BSA_low_recovery[:, 0], data_BSA_low_recovery[:, 1], s=20, c='black')
+    ax[0].set(xlim=(0.4, 2.6), ylim=(-10, 20))
 
-    ax_14[1].plot(x_intermediate, y_intermediate, color='blue')
-    ax_14[1].fill_betweenx(y_intermediate, x_intermediate, x_intermediate_lower_bound, alpha=0.6, color='yellow')
-    ax_14[1].fill_betweenx(y_intermediate, x_intermediate, x_intermediate_upper_bound, alpha=0.6, color='yellow')
-    ax_14[1].scatter(data_BSA_intermediate_enrichment[:, 0], data_BSA_intermediate_enrichment[:, 1], s=20, c='red')
-    ax_14[1].scatter(data_BSA_intermediate_recovery[:, 0], data_BSA_intermediate_recovery[:, 1], s=20, c='black')
-    ax_14[1].set(xlim=(-0.2, 8.5), ylim=(-10, 20))
+    ax[1].plot(x_intermediate, y_intermediate, color='blue')
+    ax[1].fill_betweenx(y_intermediate, x_intermediate, x_intermediate_lower_bound, alpha=0.6, color='yellow')
+    ax[1].fill_betweenx(y_intermediate, x_intermediate, x_intermediate_upper_bound, alpha=0.6, color='yellow')
+    ax[1].scatter(data_BSA_intermediate_enrichment[:, 0], data_BSA_intermediate_enrichment[:, 1], s=20, c='red')
+    ax[1].scatter(data_BSA_intermediate_recovery[:, 0], data_BSA_intermediate_recovery[:, 1], s=20, c='black')
+    ax[1].set(xlim=(-0.2, 8.5), ylim=(-10, 20))
 
-    ax_14[2].plot(x_high, y_high)
-    ax_14[2].fill_betweenx(y_high, x_high, x_high_lower_bound, alpha=0.4, color='yellow')
-    ax_14[2].fill_betweenx(y_high, x_high, x_high_upper_bound, alpha=0.4, color='yellow')
-    ax_14[2].scatter(data_BSA_high_enrichment[:, 0], data_BSA_high_enrichment[:, 1], s=20, c='red')
-    ax_14[2].scatter(data_BSA_high_recovery[:, 0], data_BSA_high_recovery[:, 1], s=20, c='black')
-    ax_14[2].set(xlim=(-0.5, 20), ylim=(-10, 20))
+    ax[2].plot(x_high, y_high)
+    ax[2].fill_betweenx(y_high, x_high, x_high_lower_bound, alpha=0.4, color='yellow')
+    ax[2].fill_betweenx(y_high, x_high, x_high_upper_bound, alpha=0.4, color='yellow')
+    ax[2].scatter(data_BSA_high_enrichment[:, 0], data_BSA_high_enrichment[:, 1], s=20, c='red')
+    ax[2].scatter(data_BSA_high_recovery[:, 0], data_BSA_high_recovery[:, 1], s=20, c='black')
+    ax[2].set(xlim=(-0.5, 20), ylim=(-10, 20))
     plt.savefig(os.path.join(output_path, 'BSA.png'), dpi=300)
     # plt.show()
 
