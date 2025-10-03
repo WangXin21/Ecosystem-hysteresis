@@ -339,7 +339,7 @@ def fit_data(data_state_0_1,
     """
     if k is None:
         k_star = 4 * c_1 * c_0 / (c_1 - c_0)
-        k_list = np.linspace(k_star+0.01, 13.5, 5000)
+        k_list = np.linspace(k_star+0.01, 15, 2000)
         # pbar = tqdm(k_list)
         # pbar.set_description('Processing:')
         rmse_list = []
