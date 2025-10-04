@@ -96,6 +96,16 @@ if __name__ == '__main__':
                                                              k=k_high_lower_bound)
     _, _, _, _, x_high_upper_bound, _, _, _, _, _ = fit_data(data_BSA_high_recovery, data_BSA_high_enrichment, shape='Z',
                                                              k=k_high_upper_bound)
+
+    index_confidence = ['y', 'x_lower_bound', 'x_upper_bound']
+    low_BSA_confidence = pd.DataFrame([y_low_lower_bound, x_low_lower_bound, x_low_upper_bound],
+                                      index=index_confidence).T
+    low_BSA_confidence.to_csv(os.path.join(output_path, 'BSA_low_confidence_interval.csv'), header=True, index=False)
+    intermediate_BSA_confidence = pd.DataFrame([y_intermediate_lower_bound, x_intermediate_lower_bound,
+                                                x_intermediate_upper_bound], index=index_confidence).T
+    intermediate_BSA_confidence.to_csv(os.path.join(output_path, 'BSA_intermediate_confidence_interval.csv'), header=True, index=False)
+    high_BSA_confidence = pd.DataFrame([y_high, x_high_lower_bound, x_high_upper_bound], index=index_confidence).T
+    high_BSA_confidence.to_csv(os.path.join(output_path, 'BSA_high_confidence_interval.csv'), header=True, index=False)
     # plot fig
     fig, ax = plt.subplots(1, 3, figsize=(8, 8))
     ax[0].plot(x_low, y_low, color='blue')

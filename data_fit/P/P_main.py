@@ -27,6 +27,11 @@ if __name__ == '__main__':
         f.write(f'k is {round(k, 2)}, R_squared is {round(R_squared, 2)}, rmse is {round(rmse, 2)},'
                 f' data TPP is {round(data_TPP_x[0], 2), round(data_TPP_x[1], 2)}')
 
+    index_confidence = ['y', 'x_lower_bound', 'x_upper_bound']
+    confidence_interval = pd.DataFrame([y, x_lower_bound, x_upper_bound],
+                                       index=index_confidence).T
+    confidence_interval.to_csv(os.path.join(output_path, 'P_confidence_interval.csv'), header=True, index=False)
+
     # mpl.rcParams['figure.dpi'] = 100
     # plt.style.use('seaborn-dark')
     fig, ax = plt.subplots()
