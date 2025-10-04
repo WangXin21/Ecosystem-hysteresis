@@ -70,6 +70,16 @@ def prediction(data,
                c_0=1,
                c_1=np.exp(1)
                ):
+    '''
+    A function that makes predictions using only one-sided data
+    ----------------
+    data: Available single-sided transfer data
+    state: '0_1' or '1_0' The state transition types of the Available data
+    pre_data: The data on the other side is used to calculate the prediction error and does not participate in the prediction
+    shape: 'S' or 'Z
+    data_TPP_x: The X-coordinate of the tipping point of the available one-sided regime shift data
+    weighted: If true, weight the prediction by the number of data points
+    '''
     if shape == 'S':
         model = ModelS(k=k, c_0=c_0, c_1=c_1)
         x, y = model.s()
@@ -107,10 +117,3 @@ def prediction(data,
     else:
         loss = 'Can not compute !'
     return loss, pre_x, pre_y
-
-
-def get_prediction_path():
-    cur_path = os.path.dirname(os.path.abspath(__file__))
-    root_path = os.path.abspath(os.path.join(cur_path, '..'))
-    return os.path.join(root_path, 'Predict', 'Prediction')
-

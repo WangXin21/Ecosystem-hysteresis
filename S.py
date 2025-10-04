@@ -4,14 +4,32 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 
-def dichotomy(fun, interval, interation=50000, epsilon=0.01):
+def dichotomy(fun, interval, interation=50000, epsilon=0.001):
     """
-    二分法求函数零点
-    :param fun: 函数
-    :param interval: 区间
-    :param interation: 迭代上限
-    :param epsilon: 精度
-    :return: 返回零点
+    Find a root of a function within a given interval using the dichotomy method.
+    The dichotomy method is an iterative root-finding algorithm that repeatedly bisects an interval and selects a
+    subinterval in which a root must lie for further processing.
+     Parameters
+    ----------
+    fun : callable
+        A function for which to find the root. Must accept a single float argument
+        and return a float value.
+    interval : list or tuple
+        A sequence of two numbers representing the initial interval [a, b] to search
+        for a root. The function must have opposite signs at these endpoints.
+    interation : int, optional
+        Maximum number of iterations to perform (default is 50000). Prevents
+        infinite loops in case of slow convergence.
+    epsilon : float, optional
+        Desired accuracy tolerance. The algorithm stops when |f(mid)| < epsilon
+        (default is 0.01).
+
+    Returns
+    -------
+    float
+        An approximation of the root of the function within the given interval.
+        If maximum iterations are reached, returns the current function value at
+        the midpoint instead.
     """
     m = np.min(interval)
     M = np.max(interval)
@@ -45,21 +63,17 @@ def dichotomy(fun, interval, interation=50000, epsilon=0.01):
 
 class ModelS:
     """
-    S型曲线
+    S Model
     """
-    def __init__(self, c_0=1, c_1=np.exp(1), k=8):
-        """
-        :param c_0:
-        :param c_1:
-        :param k:
-        """
+    def __init__(self, c_0=1, c_1=np.exp(1), k=9):
         self.c_0 = c_0
-        self.lower_bound = c_0 + 0.001
-        self.upper_bound = c_1 - 0.1
         self.c_1 = c_1
         self.k = k
         self.k_star = 4 * self.c_1 * self.c_0 / (self.c_1 - self.c_0)
-        # 求得tp点的y值
+        # SSet boundaries for the simulation while avoiding numerical explosion
+        self.lower_bound = c_0 + 0.001
+        self.upper_bound = c_1 - 0.1
+        # Obtain the y value of the tipping-points, self.TP_1 and self.TP_2, and self.TP_1 > self.TP_2
         a = self.c_1 - self.c_0 + self.k
         b = -self.k * (self.c_1 + self.c_0)
         c = self.k * self.c_0 * self.c_1
@@ -71,26 +85,19 @@ class ModelS:
         self.y_TP_2 = None
 
     def init(self):
-        # 利用二分法求得与tp点相同x坐标的点的y值
+        # the landing point after regime shift is obtained by dichotomy
         self.y_TP_1 = dichotomy(self.fun_x_TP_1, [self.TP_2, self.c_0 + 0.001])
         self.y_TP_2 = dichotomy(self.fun_x_TP_2, [self.TP_1, self.c_1 - 0.001])
 
     def f(self, y):
-        """
-        模型函数
-        :param y:
-        :return:
-        """
         return (y - self.c_0) / (self.c_1 - y) * np.exp(self.k / y)
 
     def fun_x_TP_2(self, y):
-        # 二分法的函数
         TP_1, TP_2 = self.find_TPP()
         x = self.f(TP_2)
         return self.f(y) - x
 
     def fun_x_TP_1(self, y):
-        # 二分法的函数
         TP_1, TP_2 = self.find_TPP()
         x = self.f(TP_1)
         return self.f(y) - x
@@ -102,23 +109,23 @@ class ModelS:
         return self.y_TP_2
 
     def s(self):
-        # 返回模型的x，y值
+        # Return the numerical simulation results
         y = np.linspace(self.c_0+0.001, self.c_1-0.001, 1000)
         return self.f(y), y
 
     def get_att(self, y):
-        # 取对数作为吸引力
+        # Take the logarithm as the attractive force
         return [self.k / y, np.log((y - self.c_0) / (self.c_1 - y))]
 
     def get_att_derivative(self, y):
-        # 吸引力导数
+        # The derivative of attractive force
         return [-self.k / (y ** 2), 1 / (y - self.c_0) + 1 / (self.c_1 - y)]
 
     def find_TPP(self):
         return self.TP_1, self.TP_2
 
     def final_function(self, y, state):
-        # 带有迟滞效应的函数
+        # The function of regime shift
         TP_1, TP_2 = self.find_TPP()
         y_TP_2 = self.y_TP_2
         y_TP_1 = self.y_TP_1
@@ -143,7 +150,7 @@ class ModelS:
 
 
 class ModelZ:
-    def __init__(self, c_0=1, c_1=np.exp(1), k=8):
+    def __init__(self, c_0=1, c_1=np.exp(1), k=9):
         self.c_0 = c_0
         self.c_1 = c_1
         self.lower_bound = c_0 + 0.1
@@ -211,13 +218,7 @@ class ModelZ:
 
 
 def liner_trans(data, min, max):
-    """
-    将数据线性变换到指定范围
-    :param data:
-    :param min:
-    :param max:
-    :return:
-    """
+    # Linearly transform the data to the specified range
     min_data = np.min(data)
     max_data = np.max(data)
     k = (max - min)/(max_data - min_data)
@@ -226,7 +227,7 @@ def liner_trans(data, min, max):
 
 
 def line_map(x, target, Preimage):
-    # 将数据按某一线性映射做变换
+    # Transform the data according to a certain linear mapping
     k = (np.max(target) - np.min(target)) / (np.max(Preimage) - np.min(Preimage))
     y = k * (x - np.min(Preimage)) + np.min(target)
     return y
@@ -243,18 +244,15 @@ def trans(data_state0_1,
           c_1=np.exp(1)
           ):
     """
-    计算当前k值下损失的函数
-    :param data_state0_1: 状态0-1的数据
-    :param data_state1_0: 状态1-0的数据
+    Calculate the functions of RMSE and R-squared under a certain k
+    :param data_state0_1: Data transferred from state C_0 to state C_1
+    :param data_state1_0: Data transferred from state C_1 to state C_2
     :param k:
     :param shape: ‘S’或‘Z’
-    :param method: 线性映射或者标准化后再指数运算
-    :param data_TPP_x: 数据的tp点坐标
-    :param independent_variable: 自变量列数
-    :param dependent_variable:
-    :param c_0:
-    :param c_1:
-    :return: 当前k值下损失
+    :param data_TPP_x: The X-coordinate of the tp point of the data can also be left None.
+                       If left None, the algorithm will calculate it automatically
+    :param independent_variable: In which column is the driving factor of the data located
+    :param dependent_variable: In which column is the state of the data located
     """
     if shape == 'S':
         model = ModelS(k=k)
@@ -300,12 +298,6 @@ def trans(data_state0_1,
     Preimage = [TP_1_x, TP_2_x]
     pre_x_0_1 = line_map(x_0_1, target, Preimage)
     pre_x_1_0 = line_map(x_1_0, target, Preimage)
-
-    # else:
-    #     target = data_TPP_x
-    #     Preimage = [TP_1_x, TP_2_x]
-    #     pre_x_0_1 = line_map(x_0_1, target, Preimage)
-    #     pre_x_1_0 = line_map(x_1_0, target, Preimage)
     loss_1 = np.linalg.norm(pre_x_0_1-data_x_0_1) ** 2
     loss_2 = np.linalg.norm(pre_x_1_0-data_x_1_0) ** 2
     loss = loss_1 + loss_2
@@ -324,24 +316,11 @@ def fit_data(data_state_0_1,
              dependent_variable=1
              ):
     """
-    寻找最优k值，参数同上
-    :param data_state_0_1:
-    :param data_state_1_0:
-    :param shape:
-    :param k:
-    :param method:
-    :param data_TPP_x:
-    :param c_0:
-    :param c_1:
-    :param independent_variable:
-    :param dependent_variable:
-    :return:
+    Find the optimal k value with the same parameters as above
     """
     if k is None:
         k_star = 4 * c_1 * c_0 / (c_1 - c_0)
         k_list = np.linspace(k_star+0.01, 15, 2000)
-        # pbar = tqdm(k_list)
-        # pbar.set_description('Processing:')
         rmse_list = []
         R_squared_list = []
         for k_ in k_list:
@@ -380,39 +359,24 @@ def fit_data(data_state_0_1,
     trans_data_y_0_1 = trans_data_y[:len_state0_1]
     trans_data_y_1_0 = trans_data_y[-len_state1_0:]
     if data_TPP_x is None:
-
         condition_0_1 = (trans_data_y_0_1 >= TP_2) & (trans_data_y_0_1 <= model.y_TP_2)
         tipping_data_x_0_1 = data_x_0_1[condition_0_1]
         if len(tipping_data_x_0_1) > 0:
             data_TPP_x_0_1 = np.mean(tipping_data_x_0_1)
         else:
             data_TPP_x_0_1 = np.mean(data_x_0_1)
-
         condition_1_0 = (trans_data_y_1_0 <= TP_1) & (trans_data_y_1_0 >= model.y_TP_1)
         tipping_data_x_1_0 = data_x_1_0[condition_1_0]
         if len(tipping_data_x_1_0) > 0:
             data_TPP_x_1_0 = np.mean(tipping_data_x_1_0)
         else:
             data_TPP_x_1_0 = np.mean(data_x_1_0)
-
         data_TPP_x = [data_TPP_x_0_1, data_TPP_x_1_0]
     target = data_TPP_x
     Preimage = [TP_1_x, TP_2_x]
     pre_x_0_1 = line_map(x_0_1, target, Preimage)
     pre_x_1_0 = line_map(x_1_0, target, Preimage)
     pre_x = line_map(x, target, Preimage)
-    # if data_TPP_x is None:
-    #     pre_x = liner_trans(x, data_x_min, data_x_max)
-    #     pre_x_0_1 = liner_trans(x_0_1, data_x_min, data_x_max)
-    #     pre_x_1_0 = liner_trans(x_1_0, data_x_min, data_x_max)
-    # else:
-    #     TP_1, TP_2 = model.find_TPP()
-    #     TP_1_x, TP_2_x = model.f(TP_1), model.f(TP_2)
-    #     target = data_TPP_x
-    #     Preimage = [TP_1_x, TP_2_x]
-    #     pre_x = line_map(x, target, Preimage)
-    #     pre_x_0_1 = line_map(x_0_1, target, Preimage)
-    #     pre_x_1_0 = line_map(x_1_0, target, Preimage)
     target_y = data_y
     Preimage_y = [model.upper_bound, model.lower_bound]
     pre_y = line_map(y, target_y, Preimage_y)

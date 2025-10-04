@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d2c12da-378e-4126-869b-bcb083c56066" name="更改" comment="更新了保留两位小数点后">
-      <change afterPath="$PROJECT_DIR$/.idea/Ecosystem-hysteresis.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_predict/BSA_high_prediction/BSA_high_prediction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_predict/BSA_intermediate_prediction/BSA_intermediate_prediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_predict/BSA_intermediate_prediction/BSA_intermediate_prediction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_predict/BSA_low_prediction/BSA_low_prediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_predict/BSA_low_prediction/BSA_low_prediction.py" afterDir="false" />
+    <list default="true" id="9d2c12da-378e-4126-869b-bcb083c56066" name="更改" comment="新增BSA_high_prediction">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/S.py" beforeDir="false" afterPath="$PROJECT_DIR$/S.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_fit/BSA/Output/BSA.png" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/BSA/Output/BSA.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_fit/BSA/Output/BSA_intermediate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/BSA/Output/BSA_intermediate.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_predict/CODE.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_predict/CODE.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,31 +39,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.BSA_intermediate_prediction.executor&quot;: &quot;Run&quot;,
-    &quot;Python.BSA_low_prediction.executor&quot;: &quot;Run&quot;,
-    &quot;Python.BSA_main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.P_main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.P_prediction.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Soil_nitrate_main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Soil_nitrate_prediction.executor&quot;: &quot;Run&quot;,
-    &quot;Python.bootstrap_runner.executor&quot;: &quot;Run&quot;,
-    &quot;Python.cusp.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/wangxin/Documents/生态学/写作/Generalized mechanism model for ecosystem hysteresis/Ecosystem-hysteresis&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.BSA_high_prediction.executor": "Run",
+    "Python.BSA_intermediate_prediction.executor": "Run",
+    "Python.BSA_low_prediction.executor": "Run",
+    "Python.BSA_main.executor": "Run",
+    "Python.P_main.executor": "Run",
+    "Python.P_prediction.executor": "Run",
+    "Python.Soil_nitrate_main.executor": "Run",
+    "Python.Soil_nitrate_prediction.executor": "Run",
+    "Python.bootstrap_runner.executor": "Run",
+    "Python.cusp.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/wangxin/Documents/生态学/写作/Generalized mechanism model for ecosystem hysteresis/Ecosystem-hysteresis/data_predict/BSA_high_prediction"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data_predict/BSA_high_prediction" />
       <recent name="$PROJECT_DIR$/data_predict/BSA_intermediate_prediction" />
       <recent name="$PROJECT_DIR$/data_predict/P_prediction" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.BSA_high_prediction">
+  <component name="RunManager" selected="Python.Soil_nitrate_main">
     <configuration name="BSA_high_prediction" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Ecosystem-hysteresis" />
       <option name="ENV_FILES" value="" />
@@ -182,10 +186,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.BSA_high_prediction" />
         <item itemvalue="Python.Soil_nitrate_main" />
         <item itemvalue="Python.P_main" />
         <item itemvalue="Python.BSA_main" />
+        <item itemvalue="Python.BSA_high_prediction" />
         <item itemvalue="Python.BSA_intermediate_prediction" />
       </list>
     </recent_temporary>
@@ -285,7 +289,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759587437981</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="新增BSA_high_prediction">
+      <option name="closed" value="true" />
+      <created>1759588661074</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1759588661074</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -306,7 +318,8 @@
     <MESSAGE value="补充bootstrap_runner的结果,必须输入data_TPP_x来进行bootstrap以保证得到的k_interval分布在k_hat的附近。&#10;&#10;同时更新了fit_data中的置信区间范围以及绘图。&#10;&#10;Soil_nitrate的data_TPP_x是手动设置的，因为自动判断的效果太差。&#10;&#10;还需要注意BSA中intermediate的data_TPP_x的取值，这个要仔细斟酌" />
     <MESSAGE value="更新了data_prediction" />
     <MESSAGE value="更新了保留两位小数点后" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新了保留两位小数点后" />
+    <MESSAGE value="新增BSA_high_prediction" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增BSA_high_prediction" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -314,11 +327,6 @@
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/data_predict/BSA_low_prediction/BSA_low_prediction.py</url>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/S.py</url>
-          <line>398</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
