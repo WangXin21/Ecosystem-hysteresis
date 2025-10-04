@@ -1,0 +1,4 @@
+rmse_high_recovery_k_9 is 4.196903178489626
+rmse_high_enrichment_k_9 is 5.4433755735608775
+loss_high_recovery_best_k is 3.9058870398688916
+loss_high_enrichment_best_k is 4.619329820403987

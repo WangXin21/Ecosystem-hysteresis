@@ -21,16 +21,6 @@ if __name__ == '__main__':
     data_BSA_low_enrichment = data_BSA.loc[(data_BSA['state'] == 'enrichment') & (data_BSA['enrichment treatment'] == 'low'),
     ['BSA(mg/ml)', 'dissolved oxygen(%)']].values
 
-    data_BSA_intermediate_recovery = data_BSA.loc[(data_BSA['state'] == 'recovery') & (data_BSA['enrichment treatment'] == 'intermediate'),
-    ['BSA(mg/ml)','dissolved oxygen(%)']].values
-    data_BSA_intermediate_enrichment = data_BSA.loc[(data_BSA['state'] == 'enrichment') & (data_BSA['enrichment treatment'] == 'intermediate'),
-    ['BSA(mg/ml)','dissolved oxygen(%)']].values
-
-    data_BSA_high_recovery = data_BSA.loc[(data_BSA['state'] == 'recovery') & (data_BSA['enrichment treatment'] == 'high'),
-    ['BSA(mg/ml)','dissolved oxygen(%)']].values
-    data_BSA_high_enrichment = data_BSA.loc[(data_BSA['state'] == 'enrichment') & (data_BSA['enrichment treatment'] == 'high'),
-    ['BSA(mg/ml)','dissolved oxygen(%)']].values
-
     loss_low_recovery_k_9, x_low_recovery_k_9, y_low_recovery_k_9 = prediction(data_BSA_low_recovery, '0_1',
                                                                                data_BSA_low_enrichment, 9, 'Z',
                                                                                0.55398488)
