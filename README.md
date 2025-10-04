@@ -23,3 +23,8 @@ Python 3.9 or later
 ```
 git clone git@github.com:WangXin21/Ecosystem-hysteresis.git
 ```
+## Project structure
+- **S.py** - The main framework, which is the core of the project, includes all the basic classes and methods for implementing the model
+- **data_fit** - The scripts in this directory demonstrate how to fit models using different types of ecosystem data and calculate the key hysteresis intensity K 
+- **data_prediction** - This module demonstrates how to make predictions when there is only one side of state data (for example, only data on ecosystem degradation or only data on the recovery stage)
+- **model_analysis** - This module conducts sensitivity analysis of parameters
