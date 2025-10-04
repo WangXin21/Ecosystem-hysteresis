@@ -1,1 +1,1 @@
-k is 9.111163270906282, R_squared is 0.22372474868873038, rmse is 0.375849070071967, data TPP is [-0.65, -0.2]
+k is 9.11, R_squared is 0.22, rmse is 0.38, data TPP is (-0.65, -0.2)
