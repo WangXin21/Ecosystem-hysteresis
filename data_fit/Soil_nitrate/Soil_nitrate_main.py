@@ -13,7 +13,7 @@ if __name__ == '__main__':
         os.makedirs(output_path)
     cessation = pd.read_excel('data.xlsx', usecols='G,K').values[5:28, :]
     continous = pd.read_excel('data.xlsx', usecols='B,F').values[5:26, :]
-    k_interval = [np.float64(9.648481706820647), np.float64(10.510791132199344)]
+    k_interval = [np.float64(8.963725692019297), np.float64(10.242240244571983)]
     rmse, R_squared, k, data_TPP_x, x, y, pre_0_1, pre_1_0, att, att_derivative = fit_data(cessation, continous, shape='S', data_TPP_x=[-0.65, -0.2])
     _, _, _, _, x_lower_bound, _, _, _, _, _ = fit_data(cessation, continous, shape='S', k=k_interval[0], data_TPP_x=[-0.65, -0.2])
     _, _, _, _, x_upper_bound, _, _, _, _, _ = fit_data(cessation, continous, shape='S', k=k_interval[1], data_TPP_x=[-0.65, -0.2])

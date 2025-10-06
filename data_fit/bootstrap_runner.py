@@ -40,9 +40,7 @@ if __name__ == '__main__':
     Soil_nitrate_file_path = os.path.join(cur_path, 'Soil_nitrate', 'data.xlsx')
     cessation = pd.read_excel(Soil_nitrate_file_path, usecols='G,K').values[5:28, :]
     continous = pd.read_excel(Soil_nitrate_file_path, usecols='B,F').values[5:26, :]
-    Soil_nitrate_k_interval, Soil_nitrate_rmse_interval, Soil_nitrate_R_squared_interval = bootstrap(cessation, continous, 'S', [-0.65, 0.2], n_bootstraps=10000, confidence_level=95)
-
-    print(f'P_k_interval is {P_k_interval}')
+    Soil_nitrate_k_interval, Soil_nitrate_rmse_interval, Soil_nitrate_R_squared_interval = bootstrap(cessation, continous, 'S', [-0.65, -0.2], n_bootstraps=10000, confidence_level=95)
 
     with open('bootstrap_runner_Result.txt', 'w') as file:
         file.write(f'BSA_low_k_interval is {BSA_low_k_interval} \n')
