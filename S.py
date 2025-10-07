@@ -73,21 +73,24 @@ class ModelS:
         # SSet boundaries for the simulation while avoiding numerical explosion
         self.lower_bound = c_0 + 0.001
         self.upper_bound = c_1 - 0.1
-        # Obtain the y value of the tipping-points, self.TP_1 and self.TP_2, and self.TP_1 > self.TP_2
-        a = self.c_1 - self.c_0 + self.k
-        b = -self.k * (self.c_1 + self.c_0)
-        c = self.k * self.c_0 * self.c_1
-        delta = b ** 2 - 4 * a * c
-        self.TP_1 = (-b + np.sqrt(delta)) / (2 * a)
-        self.TP_2 = (-b - np.sqrt(delta)) / (2 * a)
-
+        self.TP_1 = None
+        self.TP_2 = None
         self.y_TP_1 = None
         self.y_TP_2 = None
 
+
     def init(self):
         # the landing point after regime shift is obtained by dichotomy
-        self.y_TP_1 = dichotomy(self.fun_x_TP_1, [self.TP_2, self.c_0 + 0.001])
-        self.y_TP_2 = dichotomy(self.fun_x_TP_2, [self.TP_1, self.c_1 - 0.001])
+        if self.k > self.k_star:
+            # Obtain the y value of the tipping-points, self.TP_1 and self.TP_2, and self.TP_1 > self.TP_2
+            a = self.c_1 - self.c_0 + self.k
+            b = -self.k * (self.c_1 + self.c_0)
+            c = self.k * self.c_0 * self.c_1
+            delta = b ** 2 - 4 * a * c
+            self.TP_1 = (-b + np.sqrt(delta)) / (2 * a)
+            self.TP_2 = (-b - np.sqrt(delta)) / (2 * a)
+            self.y_TP_1 = dichotomy(self.fun_x_TP_1, [self.TP_2, self.c_0 + 0.001])
+            self.y_TP_2 = dichotomy(self.fun_x_TP_2, [self.TP_1, self.c_1 - 0.001])
 
     def f(self, y):
         return (y - self.c_0) / (self.c_1 - y) * np.exp(self.k / y)
@@ -157,10 +160,8 @@ class ModelZ:
         self.upper_bound = c_1 - 0.001
         self.k = k
         self.k_star = 4 * self.c_1 * self.c_0 / (self.c_1 - self.c_0)
-        s = ModelS(self.c_0, self.c_1, self.k)
-        s_TP_1, s_TP_2 = s.find_TPP()
-        self.TP_1 = self.c_1 + self.c_0 - s_TP_2
-        self.TP_2 = self.c_1 + self.c_0 - s_TP_1
+        self.TP_1 = None
+        self.TP_2 = None
         self.y_TP_1 = None
         self.y_TP_2 = None
 
@@ -184,9 +185,13 @@ class ModelZ:
     def init(self):
         s = ModelS(self.c_0, self.c_1, self.k)
         s.init()
-        y_TP_2, y_TP_1 = s.get_y_TP_2(), s.get_y_TP_1()
-        self.y_TP_1 = self.c_1 + self.c_0 - y_TP_2
-        self.y_TP_2 = self.c_1 + self.c_0 - y_TP_1
+        s_TP_1, s_TP_2 = s.find_TPP()
+        if s_TP_1 is not None:
+            self.TP_1 = self.c_1 + self.c_0 - s_TP_2
+            self.TP_2 = self.c_1 + self.c_0 - s_TP_1
+            y_TP_2, y_TP_1 = s.get_y_TP_2(), s.get_y_TP_1()
+            self.y_TP_1 = self.c_1 + self.c_0 - y_TP_2
+            self.y_TP_2 = self.c_1 + self.c_0 - y_TP_1
 
     def get_y_TP_1(self):
         return self.y_TP_1
@@ -260,10 +265,10 @@ def trans(data_state0_1,
     else:
         model = ModelZ(k=k)
     model.init()
-    data_x_0_1 = data_state0_1[:, independent_variable]
-    data_x_1_0 = data_state1_0[:, independent_variable]
-    data_y_0_1 = data_state0_1[:, dependent_variable]
-    data_y_1_0 = data_state1_0[:, dependent_variable]
+    data_x_0_1 = data_state0_1[:, independent_variable].astype(float)
+    data_x_1_0 = data_state1_0[:, independent_variable].astype(float)
+    data_y_0_1 = data_state0_1[:, dependent_variable].astype(float)
+    data_y_1_0 = data_state1_0[:, dependent_variable].astype(float)
     data_x = np.append(data_x_0_1, data_x_1_0)
     n = len(data_x)
     data_x_min, data_x_max = np.min(data_x), np.max(data_x)
@@ -273,31 +278,36 @@ def trans(data_state0_1,
     trans_data_y = liner_trans(data_y, model.lower_bound, model.upper_bound)
     trans_data_y_0_1 = trans_data_y[:len_state0_1]
     trans_data_y_1_0 = trans_data_y[-len_state1_0:]
-    x_0_1 = np.array(model.final_function(trans_data_y_0_1, state='0_1'))
-    x_1_0 = np.array(model.final_function(trans_data_y_1_0, state='1_0'))
-    TP_1, TP_2 = model.find_TPP()
-    TP_1_x, TP_2_x = model.f(TP_1), model.f(TP_2)
-    if data_TPP_x is None:
-
-        condition_0_1 = (trans_data_y_0_1 >= TP_2) & (trans_data_y_0_1<= model.y_TP_2)
-        tipping_data_x_0_1 = data_x_0_1[condition_0_1]
-        if len(tipping_data_x_0_1) > 0:
-            data_TPP_x_0_1 = np.mean(tipping_data_x_0_1)
-        else:
-            data_TPP_x_0_1 = np.mean(data_x_0_1)
-
-        condition_1_0 = (trans_data_y_1_0 <= TP_1) & (trans_data_y_1_0 >= model.y_TP_1)
-        tipping_data_x_1_0 = data_x_1_0[condition_1_0]
-        if len(tipping_data_x_1_0) > 0:
-            data_TPP_x_1_0 = np.mean(tipping_data_x_1_0)
-        else:
-            data_TPP_x_1_0 = np.mean(data_x_1_0)
-
-        data_TPP_x = [data_TPP_x_0_1, data_TPP_x_1_0]
-    target = data_TPP_x
-    Preimage = [TP_1_x, TP_2_x]
-    pre_x_0_1 = line_map(x_0_1, target, Preimage)
-    pre_x_1_0 = line_map(x_1_0, target, Preimage)
+    if model.TP_1 is not None:
+        x_0_1 = np.array(model.final_function(trans_data_y_0_1, state='0_1'))
+        x_1_0 = np.array(model.final_function(trans_data_y_1_0, state='1_0'))
+        TP_1, TP_2 = model.find_TPP()
+        TP_1_x, TP_2_x = model.f(TP_1), model.f(TP_2)
+        if data_TPP_x is None:
+            condition_0_1 = (trans_data_y_0_1 >= TP_2) & (trans_data_y_0_1<= model.y_TP_2)
+            tipping_data_x_0_1 = data_x_0_1[condition_0_1]
+            if len(tipping_data_x_0_1) > 0:
+                data_TPP_x_0_1 = np.mean(tipping_data_x_0_1)
+            else:
+                data_TPP_x_0_1 = np.mean(data_x_0_1)
+            condition_1_0 = (trans_data_y_1_0 <= TP_1) & (trans_data_y_1_0 >= model.y_TP_1)
+            tipping_data_x_1_0 = data_x_1_0[condition_1_0]
+            if len(tipping_data_x_1_0) > 0:
+                data_TPP_x_1_0 = np.mean(tipping_data_x_1_0)
+            else:
+                data_TPP_x_1_0 = np.mean(data_x_1_0)
+            data_TPP_x = [data_TPP_x_0_1, data_TPP_x_1_0]
+        target = data_TPP_x
+        Preimage = [TP_1_x, TP_2_x]
+        pre_x_0_1 = line_map(x_0_1, target, Preimage)
+        pre_x_1_0 = line_map(x_1_0, target, Preimage)
+    else:
+        x_0_1 = model.f(trans_data_y_0_1)
+        x_1_0 = model.f(trans_data_y_1_0)
+        target = [np.min(data_x), np.max(data_x)]
+        Preimage = [model.f(model.lower_bound), model.f(model.upper_bound)]
+        pre_x_0_1 = line_map(x_0_1, target, Preimage)
+        pre_x_1_0 = line_map(x_1_0, target, Preimage)
     loss_1 = np.linalg.norm(pre_x_0_1-data_x_0_1) ** 2
     loss_2 = np.linalg.norm(pre_x_1_0-data_x_1_0) ** 2
     loss = loss_1 + loss_2
@@ -320,7 +330,7 @@ def fit_data(data_state_0_1,
     """
     if k is None:
         k_star = 4 * c_1 * c_0 / (c_1 - c_0)
-        k_list = np.linspace(k_star+0.01, 15, 2000)
+        k_list = np.linspace(0, 15, 15000)
         rmse_list = []
         R_squared_list = []
         for k_ in k_list:
@@ -346,37 +356,45 @@ def fit_data(data_state_0_1,
     data_x_1_0 = data_state_1_0[:, independent_variable]
     data_y_0_1 = data_state_0_1[:, dependent_variable]
     data_y_1_0 = data_state_1_0[:, dependent_variable]
+    data_x = np.append(data_x_0_1, data_x_1_0)
     data_y = np.append(data_y_0_1, data_y_1_0)
-    x_0_1 = np.array(model.final_function(y, state='0_1'))
-    x_1_0 = np.array(model.final_function(y, state='1_0'))
+    if model.TP_1 is not None:
+        x_0_1 = np.array(model.final_function(y, state='0_1'))
+        x_1_0 = np.array(model.final_function(y, state='1_0'))
+        TP_1, TP_2 = model.find_TPP()
+        TP_1_x, TP_2_x = model.f(TP_1), model.f(TP_2)
+        len_state0_1 = len(data_x_0_1)
+        len_state1_0 = len(data_x_1_0)
+        trans_data_y = liner_trans(data_y, model.lower_bound, model.upper_bound)
+        trans_data_y_0_1 = trans_data_y[:len_state0_1]
+        trans_data_y_1_0 = trans_data_y[-len_state1_0:]
+        if data_TPP_x is None:
+            condition_0_1 = (trans_data_y_0_1 >= TP_2) & (trans_data_y_0_1 <= model.y_TP_2)
+            tipping_data_x_0_1 = data_x_0_1[condition_0_1]
+            if len(tipping_data_x_0_1) > 0:
+                data_TPP_x_0_1 = np.mean(tipping_data_x_0_1)
+            else:
+                data_TPP_x_0_1 = np.mean(data_x_0_1)
+            condition_1_0 = (trans_data_y_1_0 <= TP_1) & (trans_data_y_1_0 >= model.y_TP_1)
+            tipping_data_x_1_0 = data_x_1_0[condition_1_0]
+            if len(tipping_data_x_1_0) > 0:
+                data_TPP_x_1_0 = np.mean(tipping_data_x_1_0)
+            else:
+                data_TPP_x_1_0 = np.mean(data_x_1_0)
+            data_TPP_x = [data_TPP_x_0_1, data_TPP_x_1_0]
+        target = data_TPP_x
+        Preimage = [TP_1_x, TP_2_x]
+        pre_x_0_1 = line_map(x_0_1, target, Preimage)
+        pre_x_1_0 = line_map(x_1_0, target, Preimage)
+        pre_x = line_map(x, target, Preimage)
+    else:
+        target = [np.min(data_x), np.max(data_x)]
+        Preimage = [model.f(model.lower_bound), model.f(model.upper_bound)]
+        pre_x = line_map(x, target, Preimage)
+        pre_x_0_1 = line_map(x, target, Preimage)
+        pre_x_1_0 = line_map(x, target, Preimage)
     attraction = model.get_att(y)
     attraction_derivative = model.get_att_derivative(y)
-    TP_1, TP_2 = model.find_TPP()
-    TP_1_x, TP_2_x = model.f(TP_1), model.f(TP_2)
-    len_state0_1 = len(data_x_0_1)
-    len_state1_0 = len(data_x_1_0)
-    trans_data_y = liner_trans(data_y, model.lower_bound, model.upper_bound)
-    trans_data_y_0_1 = trans_data_y[:len_state0_1]
-    trans_data_y_1_0 = trans_data_y[-len_state1_0:]
-    if data_TPP_x is None:
-        condition_0_1 = (trans_data_y_0_1 >= TP_2) & (trans_data_y_0_1 <= model.y_TP_2)
-        tipping_data_x_0_1 = data_x_0_1[condition_0_1]
-        if len(tipping_data_x_0_1) > 0:
-            data_TPP_x_0_1 = np.mean(tipping_data_x_0_1)
-        else:
-            data_TPP_x_0_1 = np.mean(data_x_0_1)
-        condition_1_0 = (trans_data_y_1_0 <= TP_1) & (trans_data_y_1_0 >= model.y_TP_1)
-        tipping_data_x_1_0 = data_x_1_0[condition_1_0]
-        if len(tipping_data_x_1_0) > 0:
-            data_TPP_x_1_0 = np.mean(tipping_data_x_1_0)
-        else:
-            data_TPP_x_1_0 = np.mean(data_x_1_0)
-        data_TPP_x = [data_TPP_x_0_1, data_TPP_x_1_0]
-    target = data_TPP_x
-    Preimage = [TP_1_x, TP_2_x]
-    pre_x_0_1 = line_map(x_0_1, target, Preimage)
-    pre_x_1_0 = line_map(x_1_0, target, Preimage)
-    pre_x = line_map(x, target, Preimage)
     target_y = data_y
     Preimage_y = [model.upper_bound, model.lower_bound]
     pre_y = line_map(y, target_y, Preimage_y)

@@ -4,14 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d2c12da-378e-4126-869b-bcb083c56066" name="更改" comment="添加了以csv文件保存置信区间的代码，及其结果">
-      <change beforePath="$PROJECT_DIR$/.idea/Ecosystem-hysteresis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Ecosystem-hysteresis.iml" afterDir="false" />
+    <list default="true" id="9d2c12da-378e-4126-869b-bcb083c56066" name="更改" comment="更正了soil_nitrate的实验结果，以及置信区间">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/S.py" beforeDir="false" afterPath="$PROJECT_DIR$/S.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_fit/BSA/Output/BSA.png" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/BSA/Output/BSA.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_fit/BSA/Output/BSA_high.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/BSA/Output/BSA_high.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_fit/BSA/Output/BSA_intermediate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/BSA/Output/BSA_intermediate.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_fit/BSA/Output/BSA_low.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/BSA/Output/BSA_low.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_fit/BSA/Output/params.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_fit/P/Output/P.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/P/Output/P.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_fit/P/Output/P.png" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/P/Output/P.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_fit/Soil_nitrate/Output/Soil_nitrate.png" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/Soil_nitrate/Output/Soil_nitrate.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_fit/Soil_nitrate/Output/Soil_nitrate_confidence_interval.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/Soil_nitrate/Output/Soil_nitrate_confidence_interval.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_fit/Soil_nitrate/Output/Soil_nitrate_new.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/Soil_nitrate/Output/Soil_nitrate_new.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_fit/Soil_nitrate/Soil_nitrate_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/Soil_nitrate/Soil_nitrate_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_fit/bootstrap_runner.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/bootstrap_runner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_fit/bootstrap_runner_Result.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/bootstrap_runner_Result.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,8 +71,8 @@
       <recent name="$PROJECT_DIR$/data_predict/P_prediction" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Soil_nitrate_main">
-    <configuration name="BSA_high_prediction" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.BSA_intermediate_prediction">
+    <configuration name="BSA_intermediate_prediction" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Ecosystem-hysteresis" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -76,11 +81,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_predict/BSA_high_prediction" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_predict/BSA_intermediate_prediction" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_predict/BSA_high_prediction/BSA_high_prediction.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_predict/BSA_intermediate_prediction/BSA_intermediate_prediction.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -179,19 +184,19 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.BSA_intermediate_prediction" />
       <item itemvalue="Python.bootstrap_runner" />
-      <item itemvalue="Python.BSA_high_prediction" />
       <item itemvalue="Python.P_main" />
       <item itemvalue="Python.Soil_nitrate_main" />
       <item itemvalue="Python.BSA_main" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.BSA_intermediate_prediction" />
+        <item itemvalue="Python.BSA_main" />
+        <item itemvalue="Python.P_main" />
         <item itemvalue="Python.Soil_nitrate_main" />
         <item itemvalue="Python.bootstrap_runner" />
-        <item itemvalue="Python.P_main" />
-        <item itemvalue="Python.BSA_main" />
-        <item itemvalue="Python.BSA_high_prediction" />
       </list>
     </recent_temporary>
   </component>
@@ -330,7 +335,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759594235397</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="更正了soil_nitrate的实验结果，以及置信区间">
+      <option name="closed" value="true" />
+      <created>1759771014676</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1759771014676</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -354,7 +367,8 @@
     <MESSAGE value="新增BSA_high_prediction" />
     <MESSAGE value="添加注释以及readme" />
     <MESSAGE value="添加了以csv文件保存置信区间的代码，及其结果" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加了以csv文件保存置信区间的代码，及其结果" />
+    <MESSAGE value="更正了soil_nitrate的实验结果，以及置信区间" />
+    <option name="LAST_COMMIT_MESSAGE" value="更正了soil_nitrate的实验结果，以及置信区间" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -362,6 +376,11 @@
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/data_predict/BSA_low_prediction/BSA_low_prediction.py</url>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/S.py</url>
+          <line>277</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

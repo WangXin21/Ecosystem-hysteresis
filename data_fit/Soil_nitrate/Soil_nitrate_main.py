@@ -21,7 +21,7 @@ if __name__ == '__main__':
              'att_derivative_1', 'total_att_derivative']
     Soil_nitrate = pd.DataFrame([y, x, pre_0_1, pre_1_0, att[0], att[1], att[0]+att[1], att_derivative[0],
                                  att_derivative[1], att_derivative[0]+att_derivative[1]], index=index).T
-    Soil_nitrate.to_csv(os.path.join(output_path, 'Soil_nitrate_new.csv'), index=False)
+    Soil_nitrate.to_csv(os.path.join(output_path, 'Soil_nitrate.csv'), index=False)
     with open(os.path.join(output_path, 'params.txt'), 'w') as f:
         f.write(f'k is {round(k, 2)}, R_squared is {round(R_squared, 2)}, rmse is {round(rmse, 2)},'
                 f' data TPP is {round(data_TPP_x[0], 2), round(data_TPP_x[1], 2)}')
