@@ -1,0 +1,3 @@
+k_low is 9.32, R_squared is 0.67, rmse is 0.33, data_low_TPP_x is (np.float64(0.55), np.float64(1.21))
+k_intermediate is 9.11, R_squared is 0.47, rmse is 1.63, data_intermediate_TPP_x is (np.float64(1.88), np.float64(4.34))
+k_high is 8.23, R_squared is 0.2, rmse is 4.24, data_high_TPP_x is (np.float64(5.78), np.float64(8.27))
