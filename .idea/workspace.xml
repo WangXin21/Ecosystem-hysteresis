@@ -354,7 +354,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759852748083</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="更正了S.py对于k小于6.33的情形，并重新运行了data_fit的例子">
+      <option name="closed" value="true" />
+      <created>1759889609416</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1759889609416</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
