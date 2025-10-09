@@ -19,11 +19,12 @@ var = {}
 k_interval = range(5, 11)
 for k in k_interval:
     model_set[k] = ModelS(k=k)
+    model_set[k].init()
     x, y = model_set[k].s()
     var[k] = [x, y]
 
 mpl.rcParams['figure.dpi'] = 100
-plt.style.use('seaborn-dark')
+# plt.style.use('seaborn-dark')
 
 fig, ax = plt.subplots()
 for parameter in k_interval:
@@ -53,6 +54,7 @@ var = {}
 c_0_interval = np.linspace(1, 2, 5)
 for c_0 in c_0_interval:
     model_set[c_0] = ModelS(c_0=c_0, k=9)
+    model_set[c_0].init()
     x, y = model_set[c_0].s()
     var[c_0] = [x, y]
 
@@ -83,6 +85,7 @@ var = {}
 c_1_interval = np.linspace(np.exp(1), np.exp(1)+2, 5)
 for c_1 in c_1_interval:
     model_set[c_1] = ModelS(c_1=c_1, k=9)
+    model_set[c_1].init()
     x, y = model_set[c_1].s()
     var[c_1] = [x, y]
 
@@ -111,6 +114,7 @@ a.to_csv(os.path.join(output_path, 'Para_C_1.csv'), index=False)
 model_set = {}
 var = {}
 model_set[2] = ModelS(c_0=10, c_1=27.18, k=90)
+model_set[2].init()
 for para in model_set:
     x, y = model_set[para].s()
     var[para] = [x, y]
@@ -132,6 +136,7 @@ plt.show()
 model_set = {}
 var = {}
 model_set[2] = ModelS(k=9)
+model_set[2].init()
 for para in model_set:
     x, y = model_set[para].s()
     var[para] = [x, y]
@@ -153,6 +158,7 @@ var = {}
 c_0_interval = np.linspace(10, 15, 5)
 for c_0 in c_0_interval:
     model_set[c_0] = ModelS(c_0=c_0, k=90, c_1=27.18)
+    model_set[c_0].init()
     x, y = model_set[c_0].s()
     var[c_0] = [x, y]
 

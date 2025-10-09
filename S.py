@@ -238,7 +238,7 @@ def line_map(x, target, Preimage):
     return y
 
 
-def trans(data_state0_1,
+def loss_compute(data_state0_1,
           data_state1_0,
           k,
           shape,
@@ -334,7 +334,7 @@ def fit_data(data_state_0_1,
         rmse_list = []
         R_squared_list = []
         for k_ in k_list:
-            loss, R_squared = trans(data_state_0_1, data_state_1_0, k_, shape, data_TPP_x)
+            loss, R_squared = loss_compute(data_state_0_1, data_state_1_0, k_, shape, data_TPP_x)
             rmse_list.append(loss)
             R_squared_list.append(R_squared)
         best_index = np.argmin(rmse_list)
@@ -343,7 +343,7 @@ def fit_data(data_state_0_1,
         best_rmse = rmse_list[best_index]
     else:
         best_k = k
-        best_rmse, best_R_squared = trans(data_state_0_1, data_state_1_0, best_k, shape, data_TPP_x)
+        best_rmse, best_R_squared = loss_compute(data_state_0_1, data_state_1_0, best_k, shape, data_TPP_x)
     if shape == 'S':
         model = ModelS(k=best_k)
 

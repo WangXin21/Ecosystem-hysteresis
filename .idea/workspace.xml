@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d2c12da-378e-4126-869b-bcb083c56066" name="更改" comment="更正了S.py对于k小于6.33的情形，并重新运行了data_fit的例子" />
+    <list default="true" id="9d2c12da-378e-4126-869b-bcb083c56066" name="更改" comment="更正了S.py对于k小于6.33的情形，并重新运行了data_fit的例子">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_fit/Soil_nitrate/data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data_fit/Soil_nitrate/data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_predict/Soil_nitrate_prediction/Soil_nitrate_prediction.png" beforeDir="false" afterPath="$PROJECT_DIR$/data_predict/Soil_nitrate_prediction/Soil_nitrate_prediction.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_predict/Soil_nitrate_prediction/Soil_nitrate_prediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_predict/Soil_nitrate_prediction/Soil_nitrate_prediction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_analysis/Output/k_and_distance.csv" beforeDir="false" afterPath="$PROJECT_DIR$/model_analysis/Output/k_and_distance.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_analysis/k_and_distance.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_analysis/k_and_distance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_analysis/para_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_analysis/para_analysis.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,25 +40,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.BSA_high_prediction.executor&quot;: &quot;Run&quot;,
-    &quot;Python.BSA_intermediate_prediction.executor&quot;: &quot;Run&quot;,
-    &quot;Python.BSA_low_prediction.executor&quot;: &quot;Run&quot;,
-    &quot;Python.BSA_main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.P_main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.P_prediction.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Soil_nitrate_main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Soil_nitrate_prediction.executor&quot;: &quot;Run&quot;,
-    &quot;Python.bootstrap_runner.executor&quot;: &quot;Run&quot;,
-    &quot;Python.cusp.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/wangxin/Documents/生态学/写作/Generalized mechanism model for ecosystem hysteresis/Ecosystem-hysteresis/data_predict/BSA_high_prediction&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.BSA_high_prediction.executor": "Run",
+    "Python.BSA_intermediate_prediction.executor": "Run",
+    "Python.BSA_low_prediction.executor": "Run",
+    "Python.BSA_main.executor": "Run",
+    "Python.P_main.executor": "Run",
+    "Python.P_prediction.executor": "Run",
+    "Python.Soil_nitrate_main.executor": "Run",
+    "Python.Soil_nitrate_prediction.executor": "Run",
+    "Python.bootstrap_runner.executor": "Run",
+    "Python.cusp.executor": "Run",
+    "Python.k_and_distance.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/wangxin/Documents/生态学/写作/Generalized mechanism model for ecosystem hysteresis/Ecosystem-hysteresis/data_predict/BSA_high_prediction"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/data_predict/BSA_high_prediction" />
@@ -58,7 +67,7 @@
       <recent name="$PROJECT_DIR$/data_predict/P_prediction" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.BSA_intermediate_prediction">
+  <component name="RunManager" selected="Python.para_analysis">
     <configuration name="BSA_intermediate_prediction" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Ecosystem-hysteresis" />
       <option name="ENV_FILES" value="" />
@@ -104,7 +113,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="P_main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Soil_nitrate_prediction" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Ecosystem-hysteresis" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -113,11 +122,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_fit/P" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_predict/Soil_nitrate_prediction" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_fit/P/P_main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_predict/Soil_nitrate_prediction/Soil_nitrate_prediction.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -126,7 +135,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Soil_nitrate_main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="k_and_distance" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Ecosystem-hysteresis" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -135,11 +144,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_fit/Soil_nitrate" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/model_analysis" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_fit/Soil_nitrate/Soil_nitrate_main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model_analysis/k_and_distance.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -148,7 +157,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="bootstrap_runner" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="para_analysis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Ecosystem-hysteresis" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -157,11 +166,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_fit" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/model_analysis" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_fit/bootstrap_runner.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model_analysis/para_analysis.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -172,18 +181,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.BSA_intermediate_prediction" />
-      <item itemvalue="Python.bootstrap_runner" />
-      <item itemvalue="Python.P_main" />
-      <item itemvalue="Python.Soil_nitrate_main" />
+      <item itemvalue="Python.Soil_nitrate_prediction" />
+      <item itemvalue="Python.k_and_distance" />
+      <item itemvalue="Python.para_analysis" />
       <item itemvalue="Python.BSA_main" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.BSA_intermediate_prediction" />
+        <item itemvalue="Python.para_analysis" />
         <item itemvalue="Python.BSA_main" />
-        <item itemvalue="Python.P_main" />
-        <item itemvalue="Python.Soil_nitrate_main" />
-        <item itemvalue="Python.bootstrap_runner" />
+        <item itemvalue="Python.k_and_distance" />
+        <item itemvalue="Python.Soil_nitrate_prediction" />
+        <item itemvalue="Python.BSA_intermediate_prediction" />
       </list>
     </recent_temporary>
   </component>
@@ -362,7 +371,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759889609416</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="更正了S.py对于k小于6.33的情形，并重新运行了data_fit的例子">
+      <option name="closed" value="true" />
+      <created>1759889709916</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1759889709916</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

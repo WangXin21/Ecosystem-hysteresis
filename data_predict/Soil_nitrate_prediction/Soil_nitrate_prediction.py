@@ -22,6 +22,8 @@ if __name__ == '__main__':
 
     print(loss_cessation_best_k)
     print(loss_continus_best_k)
+    print(loss_cessation_k_9)
+    print(loss_continus_k_9)
 
     index_low = ['x', 'y']
     cessation_best_k = pd.DataFrame([x_cessation_best_k, y_cessation_best_k], index=index_low).T
