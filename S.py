@@ -91,6 +91,27 @@ class ModelS:
             self.TP_2 = (-b - np.sqrt(delta)) / (2 * a)
             self.y_TP_1 = dichotomy(self.fun_x_TP_1, [self.TP_2, self.c_0 + 0.001])
             self.y_TP_2 = dichotomy(self.fun_x_TP_2, [self.TP_1, self.c_1 - 0.001])
+        else:
+            x, y = self.s()
+            n = len(x)
+            dy_dx = np.zeros(n)
+            dy_dx[0] = (y[1] - y[0]) / (x[1] - x[0])
+            dy_dx[-1] = (y[-1] - y[-2]) / (x[-1] - x[-2])
+            for i in range(1, n - 1):
+                dy_dx[i] = (y[i + 1] - y[i - 1]) / (x[i + 1] - x[i - 1])
+            min_abs_deriv = np.max(np.abs(dy_dx))
+            target_idx = np.where(np.abs(dy_dx) == min_abs_deriv)[0]
+            max_abs_deriv = np.max(np.abs(dy_dx))
+            max_idx = np.where(np.abs(dy_dx) == max_abs_deriv)[0]
+            center_points = (x[max_idx], y[max_idx])
+            bound_point_x = 2 * center_points[0]
+            threshold = bound_point_x
+            mask = x < threshold
+            last_idx = np.where(mask)[0][-1]
+            x1, y1 = x[last_idx], y[last_idx]
+            x2, y2 = x[last_idx + 1], y[last_idx + 1]
+            y0 = y1 + (threshold - x1) * (y2 - y1) / (x2 - x1)
+            self.upper_bound = y0[0]
 
     def f(self, y):
         return (y - self.c_0) / (self.c_1 - y) * np.exp(self.k / y)
@@ -192,6 +213,8 @@ class ModelZ:
             y_TP_2, y_TP_1 = s.get_y_TP_2(), s.get_y_TP_1()
             self.y_TP_1 = self.c_1 + self.c_0 - y_TP_2
             self.y_TP_2 = self.c_1 + self.c_0 - y_TP_1
+        else:
+            self.lower_bound = self.c_1 + self.c_0 - s.upper_bound
 
     def get_y_TP_1(self):
         return self.y_TP_1
@@ -261,7 +284,6 @@ def loss_compute(data_state0_1,
     """
     if shape == 'S':
         model = ModelS(k=k)
-
     else:
         model = ModelZ(k=k)
     model.init()
@@ -299,15 +321,13 @@ def loss_compute(data_state0_1,
             data_TPP_x = [data_TPP_x_0_1, data_TPP_x_1_0]
         target = data_TPP_x
         Preimage = [TP_1_x, TP_2_x]
-        pre_x_0_1 = line_map(x_0_1, target, Preimage)
-        pre_x_1_0 = line_map(x_1_0, target, Preimage)
     else:
         x_0_1 = model.f(trans_data_y_0_1)
         x_1_0 = model.f(trans_data_y_1_0)
         target = [np.min(data_x), np.max(data_x)]
         Preimage = [model.f(model.lower_bound), model.f(model.upper_bound)]
-        pre_x_0_1 = line_map(x_0_1, target, Preimage)
-        pre_x_1_0 = line_map(x_1_0, target, Preimage)
+    pre_x_0_1 = line_map(x_0_1, target, Preimage)
+    pre_x_1_0 = line_map(x_1_0, target, Preimage)
     loss_1 = np.linalg.norm(pre_x_0_1-data_x_0_1) ** 2
     loss_2 = np.linalg.norm(pre_x_1_0-data_x_1_0) ** 2
     loss = loss_1 + loss_2
@@ -330,10 +350,12 @@ def fit_data(data_state_0_1,
     """
     if k is None:
         k_star = 4 * c_1 * c_0 / (c_1 - c_0)
-        k_list = np.linspace(0, 15, 15000)
+        k_list = np.linspace(6.33, 15, 10000)
         rmse_list = []
         R_squared_list = []
-        for k_ in k_list:
+        pbar = tqdm(k_list)
+        for k_ in pbar:
+            pbar.set_description('Searching k: ')
             loss, R_squared = loss_compute(data_state_0_1, data_state_1_0, k_, shape, data_TPP_x)
             rmse_list.append(loss)
             R_squared_list.append(R_squared)
